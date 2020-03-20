@@ -5,5 +5,4 @@
 
 ## .bashrc
 
-New to linux and vim, do give me recommendations
-:)
+Still learning linux and vim, do give me recommendations

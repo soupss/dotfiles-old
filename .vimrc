@@ -30,6 +30,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
+Plug 'rrethy/vim-illuminate'
 
 " autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -118,7 +119,7 @@ let g:coc_global_extensions = [
 "  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
-" Open nerdtree when opening folder
+" Open nerdtree when opening folder at start
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
@@ -127,22 +128,24 @@ let g:NERDTreeDirArrowCollapsible = ''
 
 " git
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "M",
-    \ "Staged"    : "S",
-    \ "Untracked" : "U",
-    \ "Renamed"   : "R",
-    \ "Unmerged"  : "u",
-    \ "Deleted"   : "D",
-    \ "Dirty"     : "d",
-    \ "Clean"     : "c",
-    \ 'Ignored'   : 'I',
+    \ "Modified"  : "Ｍ",
+    \ "Staged"    : "Ｓ",
+    \ "Untracked" : "+",
+    \ "Renamed"   : "Ｒ",
+    \ "Unmerged"  : "Ｕ",
+    \ "Deleted"   : "Ｄ",
+    \ "Dirty"     : "𝓭",
+    \ "Clean"     : "Ｃ",
+    \ 'Ignored'   : 'Ｉ',
     \ "Unknown"   : "?"
     \ }
+
 "	UNCATEGORIZED
 "  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
+set clipboard=unnamed
 set nobackup
 set nowritebackup
 set noswapfile
