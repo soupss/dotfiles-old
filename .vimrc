@@ -29,7 +29,7 @@ Plug 'airblade/vim-gitgutter'
 " 
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'rrethy/vim-illuminate'
 
 " autocomplete
@@ -84,7 +84,7 @@ syntax enable
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
 " Always show statusline
-" set laststatus=2
+set laststatus=2
 
 " Set colors for active statusbar
 hi StatusLine ctermbg=2 ctermfg=0 guibg='#50FA7B' guifg=background
