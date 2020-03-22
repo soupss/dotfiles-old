@@ -1,8 +1,9 @@
-# dotfiles
-## .vimrc
+##Usage
 
-## .tmux.conf
+* glone the repo
 
-## .bashrc
+* unpack file of choice
 
-Still learning linux and vim, do give me recommendations
+	./unpack.sh .bashrc
+
+Unpacking is just copying the specified file to your home dir
