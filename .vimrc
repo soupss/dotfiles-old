@@ -26,10 +26,14 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 
+" motions
+Plug 'tpope/vim-commentary'
+
+" objects
+Plug 'tpope/vim-surround'
+
 " 
 Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 Plug 'rrethy/vim-illuminate'
 
 " autocomplete
@@ -83,21 +87,11 @@ syntax enable
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
-" Always show statusline
-set laststatus=2
-
 " Set colors for active statusbar
 hi StatusLine ctermbg=2 ctermfg=0 guibg='#50FA7B' guifg=background
 
 " Set colors for nonactive statusbar
 hi StatusLineNC ctermbg=NONE ctermfg=2 guibg=background guifg='#50FA7B' 
-
-" custom statusline
-"set statusline=
-"set statusline+=%f\ %M
-"set statusline+=%=
-"set statusline+=line\ %l
-"set statusline+=\ %p%%
 
 "	COC - Congquer Of Completion
 "  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
@@ -119,6 +113,7 @@ let g:coc_global_extensions = [
 "  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
+
 " Open nerdtree when opening folder at start
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -126,7 +121,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
-" git
+" Git file symbols
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "Ｍ",
     \ "Staged"    : "Ｓ",
@@ -145,7 +140,8 @@ let g:NERDTreeIndicatorMapCustom = {
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
-set clipboard=unnamed
+set cursorline
+
 set nobackup
 set nowritebackup
 set noswapfile
@@ -178,6 +174,8 @@ set autoread
 " Turn on the Wild menu
 set wildmenu
 set wildmode=longest,list,full
+
+set path+=**
 
 "Always show current position
 set ruler
@@ -238,6 +236,7 @@ let mapleader=' '
 " Move between buffers
 nnoremap <leader>l :bnext<cr>
 nnoremap <leader>h :bprevious<cr>
+nnoremap <leader>w :b#<cr>
 
 " Move between tabs
 nnoremap <leader><tab> :tabnext<cr>
@@ -250,7 +249,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " Toggle zen mode (Goyo plugin)
-" NOTE ! This enables dark mode for some reason
 nnoremap <leader>g :Goyo<cr>
 
 " Toggle search highlight
@@ -268,12 +266,9 @@ vnoremap <ESC> <C-c>
 
 " Open fzf
 nnoremap <silent> <leader>o :Files<cr>
-" Search everywhere
-nnoremap <silent> <leader>O :Files /<cr>
 
 " Toggle nerdtree with leader  + n
-nnoremap <leader>n :NERDTreeToggle<CR>
-
+nnoremap <leader>n :NERDTreeToggle<cr>
 
 """"""""" Coc settings from readme
 
@@ -284,10 +279,6 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 " Short messages
 set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -306,8 +297,8 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" <CR>: confirm completion, or insert <CR>
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+" <cr>: confirm completion, or insert <cr>
+inoremap <expr> <cr> pumvisible() ? "\<C-Y>" : "\<cr>"
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -316,7 +307,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<cr>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
