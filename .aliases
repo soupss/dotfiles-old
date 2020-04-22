@@ -16,5 +16,14 @@ alias fgrep="fgrep --color=auto"
 # create parent dir, output visual
 alias mkdir="mkdir -pv"
 
-# open from bash
+# quick open
 alias o="xdg-open"
+
+# o () {
+#     if [ $# -eq 0 ]; 
+#     then
+# 	xdg-open .
+#     else
+# 	xdg-open $1
+#     fi
+# }

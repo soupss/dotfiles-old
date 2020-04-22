@@ -21,6 +21,7 @@ endif
 
 " colors
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sheerun/vim-polyglot'
 
 " source control
 Plug 'xuyuanp/nerdtree-git-plugin'
@@ -35,6 +36,7 @@ Plug 'tpope/vim-surround'
 " 
 Plug 'vim-syntastic/syntastic'
 Plug 'rrethy/vim-illuminate'
+Plug 'lepture/vim-jinja'
 
 " autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -65,7 +67,6 @@ if has('gui_running')
    " Turn off italics because they look weird in gvim
    let g:dracula_italic=0
 endif
-
 
 "	COLORS
 "  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
@@ -140,6 +141,9 @@ let g:NERDTreeIndicatorMapCustom = {
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
+set showbreak=\\ "
+set lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
+set list
 set cursorline
 
 set nobackup
@@ -215,7 +219,7 @@ set shiftwidth=4
 set autoindent
 
 " Wrap lines, dont split words
-set wrap
+set nowrap
 set linebreak
 
 " Disable automatic comment when moving to a new line
@@ -252,7 +256,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>g :Goyo<cr>
 
 " Toggle search highlight
-nnoremap <leader>s :set hlsearch!<cr>
+nnoremap <leader>s :set hlsearch! hlsearch?<cr>
  
 " Run current python script with f5
 noremap <F5> :!clear;python3 %<cr>
@@ -269,6 +273,12 @@ nnoremap <silent> <leader>o :Files<cr>
 
 " Toggle nerdtree with leader  + n
 nnoremap <leader>n :NERDTreeToggle<cr>
+
+" Toggle line wrap
+nnoremap <leader>l :set wrap! wrap?<cr>
+
+" Toggle list
+nnoremap <leader>z :set list! list?<cr>
 
 """"""""" Coc settings from readme
 
