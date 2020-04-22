@@ -1,6 +1,6 @@
 #### heavily inspired by https://github.com/mathiasbynens/dotfiles
 
-font: 'Iosevka Fixed Medium'
+font: 'Iosevka Fixed Medium Extended'
 https://typeof.net/Iosevka/
 
 colors: 'Dracula'
