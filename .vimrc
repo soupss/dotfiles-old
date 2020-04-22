@@ -13,108 +13,128 @@
 " / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
-if has('unix')
-    call plug#begin('~/.vim/plugged')
-elseif has('win32')
-    call plug#begin('~\vimfiles\plugins')
-endif
+call plug#begin('~/.vim/plugged')
 
+" Tools
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'scrooloose/nerdtree'
+    Plug 'junegunn/goyo.vim'
+    Plug 'xuyuanp/nerdtree-git-plugin'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'sheerun/vim-polyglot'
+" Syntax
+    Plug 'vim-syntastic/syntastic'
+    Plug 'rrethy/vim-illuminate'
+    Plug 'lepture/vim-jinja'
+    Plug 'tpope/vim-markdown'
+    Plug 'ap/vim-css-color'
 " colors
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'sheerun/vim-polyglot'
-
-" source control
-Plug 'xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
-
-" motions
-Plug 'tpope/vim-commentary'
-
-" objects
-Plug 'tpope/vim-surround'
-
-" 
-Plug 'vim-syntastic/syntastic'
-Plug 'rrethy/vim-illuminate'
-Plug 'lepture/vim-jinja'
-
-" autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" file finding
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-
-" file structure
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-
-" other cool unorganized stuff
-Plug 'junegunn/goyo.vim'
-
+    Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-" gvim stuff
-if has('gui_running')
-   " Remove menubar and toolbar
-   " set guioptions -=m guioptions -=T 
+" General settings
+set encoding=utf8
+syntax enable
+set hidden
+set showmode showcmd
+set number relativenumber
+filetype plugin on
+set ruler
+set autoread
+set autoindent
+set nowrap
+set linebreak
+set softtabstop=4
+set shiftwidth=4
+set wildmenu
+set wildmode=longest,full
+set path+=**
+set smartcase
+set incsearch 
+set lazyredraw 
+filetype indent on
+set splitbelow splitright
+set showmatch 
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+set matchpairs+=<:>
+set scrolloff=5
+set backspace=indent,eol,start
+set showbreak=\\ "
+set lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
+set list
+set cursorline
+set nobackup
+set nowritebackup
+set noswapfile
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['python']
 
-   " Remove right and left scrollbars
-   set guioptions -=r guioptions -=L
 
-   " Sets font+font size
-   set guifont=Hack\ Nerd\ Font\ 11
-   " Turn off italics because they look weird in gvim
-   let g:dracula_italic=0
-endif
-
-"	COLORS
-"  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
-" / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
-"`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
-
-" Set color theme
+" Color settings
 let g:dracula_colorterm = 0
 colorscheme dracula
-
-" Set dark scheme
 set background=dark
 
-" Enable syntax highlighting
-syntax enable
+" Statusline
+set laststatus=2
 
-"	STATUS LINE
-"  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
-" / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
-"`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
-
-" Set colors for active statusbar
+ "Active statusbar is green
 hi StatusLine ctermbg=2 ctermfg=0 guibg='#50FA7B' guifg=background
+ "Inactive statusbar is transparent
+hi StatusLineNC ctermbg=NONE ctermfg=2 guibg=background guifg='#50FA7B'
 
-" Set colors for nonactive statusbar
-hi StatusLineNC ctermbg=NONE ctermfg=2 guibg=background guifg='#50FA7B' 
+set statusline=
+set statusline+=\ %y
+set statusline+=\ %r
+set statusline+=\ %F
+set statusline+=%#CursorLineNr# "transparent
+set statusline+=%= "Right side settings
+set statusline+=%#WildMenu#
+set statusline+=\ line\ %l/%L
+set statusline+=\ -\ %p%%
 
-"	COC - Congquer Of Completion
-"  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
-" / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
-"`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
+" Keybindings
+let mapleader=' '
 
-let g:coc_global_extensions = [
-    \ 'coc-pairs',
-    \ 'coc-tsserver',
-    \ 'coc-html',
-    \ 'coc-css',
-    \ 'coc-python',
-    \ 'coc-json',
-    \ 'coc-omnisharp',
-    \ 'coc-prettier',
-    \ ]
+nnoremap <leader>g :Goyo<cr>
+nnoremap <leader>w :b#<cr>
+nnoremap <leader>s :set hlsearch! hlsearch?<cr>
+nnoremap <leader>l :set wrap! wrap?<cr>
+nnoremap <leader>z :set list! list?<cr>
 
-"	NERDTREE
-"  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
-" / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
-"`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
+nnoremap <silent> <leader>o :Files<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
 
+nnoremap <leader><tab> :tabnext<cr>
+nnoremap <leader><S-tab> :tabprevious<cr>
+
+" Move selection
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+nnoremap <Up> :resize +2<CR>
+nnoremap <Down> :resize -2<CR>
+nnoremap <Left> :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+
+vnoremap <ESC> <C-c> " prevent visual mode exit lag
+nnoremap Q <nop> " Disable ex mode
+
+" NERDTree
 " Open nerdtree when opening folder at start
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -136,152 +156,44 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-"	UNCATEGORIZED
-"  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
-" / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
-"`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
+" Goyo settings
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+endfunction
 
-set showbreak=\\ "
-set lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
-set list
-set cursorline
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+endfunction
 
-set nobackup
-set nowritebackup
-set noswapfile
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-" Unload abandoned buffers
-set hidden
-
-" jump between < and > with %
-set matchpairs+=<:>
-
-" Cursor is minimum 3 lines from edge
-set scrolloff=3
-
-" Show commands and mode
-set showmode showcmd
-
-" Show line number and relative line numbers
-set number relativenumber
-
-" Splits open at bottom and right
-set splitbelow splitright
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-" Turn on the Wild menu
-set wildmenu
-set wildmode=longest,list,full
-
-set path+=**
-
-"Always show current position
-set ruler
-
-" Configure backspace so it acts as it should act
-set backspace=indent,eol,start
-
-" When searching try to be smart about cases 
-set smartcase
-
-" Makes search act like search in modern browsers
-set incsearch 
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw 
-
- " Show matching brackets when text indicator is over them
-set showmatch 
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Set tab length
-set softtabstop=4
-set shiftwidth=4
-
-" Enable auto indent
-set autoindent
-
-" Wrap lines, dont split words
-set nowrap
-set linebreak
-
-" Disable automatic comment when moving to a new line
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Make syntastic check python3
-let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['python']
-
-"	BINDINGS
-"  .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-.   .-.-
-" / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \ \ / / \
-"`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
-
-" Set leader to space
-let mapleader=' '
-
-" Move between buffers
-nnoremap <leader>l :bnext<cr>
-nnoremap <leader>h :bprevious<cr>
-nnoremap <leader>w :b#<cr>
-
-" Move between tabs
-nnoremap <leader><tab> :tabnext<cr>
-nnoremap <leader><S-tab> :tabprevious<cr>
-
-" Move between windows
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
-" Toggle zen mode (Goyo plugin)
-nnoremap <leader>g :Goyo<cr>
-
-" Toggle search highlight
-nnoremap <leader>s :set hlsearch! hlsearch?<cr>
- 
-" Run current python script with f5
-noremap <F5> :!clear;python3 %<cr>
-
-" Run python module in this dir with f6
-noremap <F6> :!clear;python3 .<cr>
-
-" Maps Control+c to escape in visual mode
-""No wait for input when exiting visual mode
-vnoremap <ESC> <C-c>
-
-" Open fzf
-nnoremap <silent> <leader>o :Files<cr>
-
-" Toggle nerdtree with leader  + n
-nnoremap <leader>n :NERDTreeToggle<cr>
-
-" Toggle line wrap
-nnoremap <leader>l :set wrap! wrap?<cr>
-
-" Toggle list
-nnoremap <leader>z :set list! list?<cr>
+" COC - Conquer Of Completion
+let g:coc_global_extensions = [
+    \ 'coc-pairs',
+    \ 'coc-tsserver',
+    \ 'coc-html',
+    \ 'coc-css',
+    \ 'coc-python',
+    \ 'coc-json',
+    \ 'coc-omnisharp',
+    \ 'coc-prettier',
+    \ ]
 
 """"""""" Coc settings from readme
-
+" vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
