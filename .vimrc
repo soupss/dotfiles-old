@@ -14,7 +14,6 @@
 "`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'   `-`-'
 
 call plug#begin('~/.vim/plugged')
-
 " Tools
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'junegunn/fzf.vim'
@@ -27,15 +26,17 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'sheerun/vim-polyglot'
-" Syntax
-    Plug 'vim-syntastic/syntastic'
     Plug 'rrethy/vim-illuminate'
+    Plug 'ap/vim-css-color'
+    Plug 'lervag/vimtex'
+" Syntax
     Plug 'lepture/vim-jinja'
     Plug 'tpope/vim-markdown'
-    Plug 'ap/vim-css-color'
 " colors
     Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
+
+let g:polyglot_disabled = ['latex']
 
 " General settings
 set encoding=utf8
@@ -74,33 +75,45 @@ set cursorline
 set nobackup
 set nowritebackup
 set noswapfile
+set signcolumn=yes
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python']
-
 
 " Color settings
 let g:dracula_colorterm = 0
 colorscheme dracula
 set background=dark
+set termguicolors
 
 " Statusline
 set laststatus=2
 
- "Active statusbar is green
-hi StatusLine ctermbg=2 ctermfg=0 guibg='#50FA7B' guifg=background
+ "Active statusbar is purple
+" hi StatusLine guibg='#282A36'
  "Inactive statusbar is transparent
-hi StatusLineNC ctermbg=NONE ctermfg=2 guibg=background guifg='#50FA7B'
+" hi StatusLineNC ctermbg=NONE
+
+hi MyGreen guibg='#50fa7b' guifg='#282a36'
+hi MyCyan guibg='#8be9fd' guifg='#282a36'
+hi MyPurple guibg='#bd93f9' guifg='#282a36'
+hi MyPink guibg='#ff79c6' guifg='#222222'
+hi MyRed guibg='#ff5555' guifg='#282a36'
+hi MyOrange guibg='#ffb86c' guifg='#282a36'
+hi MyComment guibg='#6272a4' guifg='#222222'
 
 set statusline=
-set statusline+=\ %y
-set statusline+=\ %r
-set statusline+=\ %F
-set statusline+=%#CursorLineNr# "transparent
+set statusline+=%#MyPink# " transparent color
+set statusline+=\ %t\   " filename
+set statusline+=%#MyGreen# " transparent color
+set statusline+=\ %y\  " filetype
+set statusline+=%#CursorLineNr# " transparent color
 set statusline+=%= "Right side settings
-set statusline+=%#WildMenu#
-set statusline+=\ line\ %l/%L
-set statusline+=\ -\ %p%%
+set statusline+=%#MyCyan# " transparent color
+set statusline+=\ line\ %l\ 
+set statusline+=%#MyPurple# " transparent color
+set statusline+=\ of\ %L\ 
+set statusline+=%#CursorLineNr# " transparent color
 
 " Keybindings
 let mapleader=' '
