@@ -86,14 +86,7 @@ colorscheme dracula
 set background=dark
 set termguicolors
 
-" Statusline
-set laststatus=2
-
- "Active statusbar is purple
-" hi StatusLine guibg='#282A36'
- "Inactive statusbar is transparent
-" hi StatusLineNC ctermbg=NONE
-
+" Custom colors
 hi MyGreen guibg='#50fa7b' guifg='#282a36'
 hi MyCyan guibg='#8be9fd' guifg='#282a36'
 hi MyPurple guibg='#bd93f9' guifg='#282a36'
@@ -101,15 +94,19 @@ hi MyPink guibg='#ff79c6' guifg='#222222'
 hi MyRed guibg='#ff5555' guifg='#282a36'
 hi MyOrange guibg='#ffb86c' guifg='#282a36'
 hi MyComment guibg='#6272a4' guifg='#222222'
+hi MyYellow guibg='#f1fa8c' guifg='#222222'
+
+" Statusline
+set laststatus=2
 
 set statusline=
 set statusline+=%#MyPink# " transparent color
 set statusline+=\ %t\   " filename
-set statusline+=%#MyGreen# " transparent color
+set statusline+=%#MyCyan# " transparent color
 set statusline+=\ %y\  " filetype
 set statusline+=%#CursorLineNr# " transparent color
 set statusline+=%= "Right side settings
-set statusline+=%#MyCyan# " transparent color
+set statusline+=%#MyYellow# " transparent color
 set statusline+=\ line\ %l\ 
 set statusline+=%#MyPurple# " transparent color
 set statusline+=\ of\ %L\ 
@@ -147,6 +144,14 @@ nnoremap <Right> :vertical resize -2<CR>
 vnoremap <ESC> <C-c> " prevent visual mode exit lag
 nnoremap Q <nop> " Disable ex mode
 
+" Autocommands
+" cursorline on active window
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter,VimEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+
 " NERDTree
 " Open nerdtree when opening folder at start
 autocmd StdinReadPre * let s:std_in=1
@@ -170,6 +175,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 " Goyo settings
+" Goyo disables statusline colors. Is it because of termguicolors?
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
     silent !tmux set status off
