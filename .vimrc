@@ -10,8 +10,8 @@ call plug#begin('~\vimfiles\plugged')
     Plug 'rrethy/vim-illuminate'
     Plug 'junegunn/goyo.vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
-    Plug 'jnurmine/Zenburn'
     Plug 'morhetz/gruvbox'
+    Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " General settings
@@ -31,12 +31,13 @@ set shiftwidth=4
 set wildmenu
 set wildmode=longest,full
 set path+=**
+set ignorecase
 set smartcase
-set incsearch 
-set lazyredraw 
+set incsearch
+set lazyredraw
 filetype indent on
 set splitbelow splitright
-set showmatch 
+set showmatch
 set noeb vb t_vb=
 set tm=500
 set matchpairs+=<:>
@@ -49,43 +50,41 @@ set cursorline
 set nobackup
 set nowritebackup
 set noswapfile
-set signcolumn=no
+set signcolumn=yes
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
-let &t_Co=256
-set guifont=iosevka_fixed_medium_extended:h11
-set guioptions=
 
 " colors
-colorscheme zenburn
+set t_Co=256
+let g:gruvbox_contrast_dark = "soft"
 set background=dark
-let g:dracula_colorterm = 0
-colorscheme dracula
-set background=dark
-set termguicolors
+colorscheme gruvbox
 
-" Custom colors
-hi MyGreen guibg='#50fa7b' guifg='#282a36'
-hi MyCyan guibg='#8be9fd' guifg='#282a36'
-hi MyPurple guibg='#bd93f9' guifg='#282a36'
-hi MyPink guibg='#ff79c6' guifg='#222222'
-hi MyRed guibg='#ff5555' guifg='#282a36'
-hi MyOrange guibg='#ffb86c' guifg='#282a36'
-hi MyComment guibg='#6272a4' guifg='#222222'
-hi MyYellow guibg='#f1fa8c' guifg='#222222'
+"custom
+hi! link SignColumn LineNr
+hi link GitGutterAdd GruvBoxAqua
+hi link GitGutterChange GruvBoxYellow
+hi link GitGutterDelete GruvBoxRed
+let g:gitgutter_sign_removed = '-'
 
 " Statusline
+" clear statusline highlight, still visible between splits
+hi StatusLine cterm=NONE ctermfg=NONE ctermbg=NONE
+hi StatusLineNC cterm=NONE ctermfg=NONE ctermbg=NONE
+" custom
+set laststatus=2
 set statusline=
-set statusline+=%#MyPink# " transparent color
-set statusline+=\ %t\   " filename
-set statusline+=%#MyCyan# " transparent color
-set statusline+=\ %y\  " filetype
-set statusline+=%#CursorLineNr# " transparent color
+set statusline+=%#GruvboxRed#
+set statusline+=\ %M  " modified flag
+set statusline+=%#GruvboxGreen#
+set statusline+=%t  " filename
+set statusline+=%#GruvboxBlue#
+set statusline+=\ %y\   " filetype
+set statusline+=%#LineNr# " bar color
 set statusline+=%= "Right side settings
-set statusline+=%#MyYellow# " transparent color
-set statusline+=\ line\ %l\ 
-set statusline+=%#MyPurple# " transparent color
+set statusline+=%#GruvboxPurple#
+set statusline+=\ line\ %l
+set statusline+=%#GruvboxAqua#
 set statusline+=\ of\ %L\ 
-set statusline+=%#CursorLineNr# " transparent color
 
 " keybinds
 let mapleader = ' '
@@ -109,3 +108,10 @@ au filetype python nnoremap <buffer> <F6> :w<cr>:!cls<cr>:exec '!python3 .'<cr>
 nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>g :Goyo<cr>
 vnoremap <ESC> <C-c> " prevent visual mode exit lag
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
