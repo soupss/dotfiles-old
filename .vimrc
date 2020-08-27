@@ -51,6 +51,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set signcolumn=yes
+set updatetime=100
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
 
 " colors
@@ -60,16 +61,19 @@ set background=dark
 colorscheme gruvbox
 
 "custom
-hi! link SignColumn LineNr
-hi link GitGutterAdd GruvBoxAqua
-hi link GitGutterChange GruvBoxYellow
-hi link GitGutterDelete GruvBoxRed
+function Highlights()
+    hi! link SignColumn LineNr
+    hi link GitGutterAdd GruvBoxAqua
+    hi link GitGutterChange GruvBoxYellow
+    hi link GitGutterDelete GruvBoxRed
+    hi StatusLine cterm=NONE ctermfg=NONE ctermbg=NONE
+    hi StatusLineNC cterm=NONE ctermfg=NONE ctermbg=NONE
+endfunction
+call Highlights()
 let g:gitgutter_sign_removed = '-'
 
 " Statusline
 " clear statusline highlight, still visible between splits
-hi StatusLine cterm=NONE ctermfg=NONE ctermbg=NONE
-hi StatusLineNC cterm=NONE ctermfg=NONE ctermbg=NONE
 " custom
 set laststatus=2
 set statusline=
@@ -82,12 +86,23 @@ set statusline+=\ %y\   " filetype
 set statusline+=%#LineNr# " bar color
 set statusline+=%= "Right side settings
 set statusline+=%#GruvboxPurple#
+
 set statusline+=\ line\ %l
 set statusline+=%#GruvboxAqua#
 set statusline+=\ of\ %L\ 
 
+" only show cursorline on current split
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
 " keybinds
 let mapleader = ' '
+nnoremap <F4> :so $MYVIMRC<cr>
 nnoremap Y y$  " why is this not default
 " move between splits
 nnoremap <C-h> <C-w>h
@@ -108,10 +123,21 @@ au filetype python nnoremap <buffer> <F6> :w<cr>:!cls<cr>:exec '!python3 .'<cr>
 nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>g :Goyo<cr>
 vnoremap <ESC> <C-c> " prevent visual mode exit lag
-augroup CursorLine
-    au!
-    au VimEnter * setlocal cursorline
-    au WinEnter * setlocal cursorline
-    au BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-augroup END
+
+" goyo settings
+let g:goyo_width='50%'
+let g:goyo_height='80%'
+function! s:goyo_enter()
+    set scrolloff=999
+    set noshowcmd
+endfunction
+if !exists('*s:goyo_leave')
+    function! s:goyo_leave()
+	set scrolloff=5
+	set showcmd
+	" why doesnt this work
+	call! Highlights()
+    endfunction
+endif
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
