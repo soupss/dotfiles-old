@@ -130,10 +130,19 @@ vnoremap <ESC> <C-c>  " prevent visual mode exit lag
 let g:goyo_width='45%'
 let g:goyo_height='80%'
 function! s:goyo_enter()
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
+    normal zz
     set scrolloff=999
     set noshowcmd
 endfunction
 function! s:goyo_leave()
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
     set scrolloff=0
     set showcmd
     call Highlights()
