@@ -1,0 +1,43 @@
+#!/bin/bash
+
+dots=~/Documents/Repos/dotfiles
+
+if [ $# -eq 0 ]
+then
+	echo "no flags supplied"
+	echo "available flags:"
+	echo "-s 			sync dotfiles with local dotfiles git repo"
+	echo "-p COMMIT_MSG 		push changes to remote git repo, optional msg"
+else
+	cd $dots
+fi
+
+while [ $# -gt 0 ]
+do
+	case "$1" in
+		-s|--sync)
+			cp ~/.config/bspwm/bspwmrc $dots
+			cp ~/.config/sxhkd/sxhkdrc $dots
+			cp ~/.config/polybar/* $dots/polybar
+			cp ~/.vimrc $dots
+			cp ~/.zshrc $dots
+			cp ~/.tmux.conf $dots
+			git diff --compact-summary
+			shift
+			;;
+		-p|--push)
+			git add -A
+			shift
+			if [ $# -eq 0 ]
+			then
+				git commit -m "update" && echo "automatic commit msg=\"update\"" && git push
+			else
+				git commit -m "$1" && git push
+			fi
+			shift
+			;;
+		*)
+			break
+			;;
+	esac
+done
