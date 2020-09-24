@@ -53,6 +53,9 @@ set noswapfile
 set signcolumn=yes
 set updatetime=100
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
+let g:tex_flavor = 'latex'
+let g:Illuminate_delay = 100
+let g:gitgutter_sign_removed = '-'
 
 " colors
 set t_Co=256
@@ -71,8 +74,6 @@ function Highlights()
     hi illuminatedWord cterm=reverse
 endfunction
 call Highlights()
-let g:Illuminate_delay = 100
-let g:gitgutter_sign_removed = '-'
 
 " Statusline
 " clear statusline highlight, still visible between splits

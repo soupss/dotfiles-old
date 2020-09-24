@@ -1,0 +1,61 @@
+# terminal emulator
+super + Return
+	xfce4-terminal
+
+# web browser
+super + w
+	firefox
+
+# program launcher
+super + space
+	rofi -theme gruvbox-light -show run
+
+# power menu script
+super + shift + Escape
+	power-menu
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# restart bspwm
+super + alt + r
+	bspc wm -r
+
+# close
+super + q
+	bspc node -c
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# move and swap nodes
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# send window to top of node
+super + shift + Return
+	bspc node -s first --follow
+
+# desktops
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# focus last desktop
+super + Tab
+	bspc desktop -f last
+
+# resize
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
