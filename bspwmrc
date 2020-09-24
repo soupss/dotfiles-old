@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# polybar dissapears when polybar config is updated after bspwm is restarted with "bspwm wm -r", why?
 polybar top -r &
+# this doesnt always work, why?
 setxkbmap -option caps:escape &
 xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd > /dev/null || sxhkd &

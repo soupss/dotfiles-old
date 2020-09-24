@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvie/vim-flake8'
     Plug 'rrethy/vim-illuminate'
     Plug 'junegunn/goyo.vim'
-    Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
 call plug#end()
