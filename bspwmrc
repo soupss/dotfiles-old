@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 polybar top -r &
 setxkbmap -option caps:escape &

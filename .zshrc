@@ -2,7 +2,7 @@
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-PS1="%B%F{yellow}%~ %(?.%F{blue}:).%F{red}:() %F{magenta}%# %f%b"
+PS1="%B%F{yellow}%~ %(?.%F{blue}%#.%F{red}%#) %f%b"
 
 # History in cache directory:
 HISTSIZE=10000
