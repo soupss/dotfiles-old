@@ -51,6 +51,7 @@ set nowritebackup
 set noswapfile
 set signcolumn=yes
 set updatetime=100
+set undofile
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
 let g:tex_flavor = 'latex'
 let g:Illuminate_delay = 100
@@ -124,7 +125,14 @@ au filetype python nnoremap <buffer> <F5> :w<cr>:!cls<cr>:exec '!python3 %'<cr>
 au filetype python nnoremap <buffer> <F6> :w<cr>:!cls<cr>:exec '!python3 .'<cr>
 nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>g :Goyo<cr>
-vnoremap <ESC> <C-c>  " prevent visual mode exit lag
+" cleaner exit from insert/visual mode
+vnoremap <ESC> <C-c>
+inoremap <ESC> <C-c>
+" repeat last macro instead of ex mode
+nnoremap Q @@
+" delete without saving to register
+nnoremap s "_d
+
 
 " goyo settings
 let g:goyo_width='45%'
