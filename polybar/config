@@ -47,7 +47,7 @@ font-3 = siji:pixelsize=10;1
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = wlan eth pulseaudio date power-menu
+modules-right = night-mode wlan eth pulseaudio date power-menu
 
 wm-restack = bspwm
 
@@ -171,6 +171,14 @@ menu-0-1 = shutdown
 menu-0-1-exec = shutdown now
 menu-0-1-background = ${colors.red}
 menu-0-1-padding = 1
+
+[module/night-mode]
+type = custom/script
+exec = night label
+interval = 0
+format-background = ${colors.gray}
+format-padding = 1
+click-left = night toggle
 
 [settings]
 screenchange-reload = true
