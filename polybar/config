@@ -152,18 +152,18 @@ format-muted-padding = 2
 
 [module/power-menu]
 type = custom/menu
-expand-right = true
+expand-right = false
 
 label-open = :)
-label-open-background = ${colors.green}
+label-open-background = ${colors.aqua}
 label-open-padding = 1
 
-label-close = cancel
-label-close-background = ${colors.green}
+label-close = :)
+label-close-background = ${colors.aqua}
 label-close-padding = 1
 
 menu-0-0 = reboot
-menu-0-0-exec = reboot
+menu-0-0-exec =  reboot
 menu-0-0-background = ${colors.orange}
 menu-0-0-padding = 1
 
