@@ -8,6 +8,7 @@ blue = #458588
 purple = #b16286
 aqua = #689d6a
 gray = #928374
+orange = #d65d0e
 lightred = #fb4934
 lightgreen = #b8bb26
 lightyellow = #fabd2f
@@ -15,6 +16,7 @@ lightblue = #83a598
 lightpurple = #d3869b
 lightaqua = #8ec07c
 lightgray = #a89984
+lightorange = #fe8019
 
 [bar/top]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -33,11 +35,10 @@ border-color = #00000000
 border-bottom-size = 5
 border-bottom-color = ${colors.aqua}
 
-padding-left = 0
 padding-right = 2
 
 module-margin-left = 0
-module-margin-right = 5
+module-margin-right = 2
 
 font-0 = JetBrains Mono NL,JetBrains Mono NL Medium:style=Medium,Regular:pixelsize=11;4
 font-1 = fixed:pixelsize=10;1
@@ -46,7 +47,7 @@ font-3 = siji:pixelsize=10;1
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = wlan eth pulseaudio date
+modules-right = wlan eth pulseaudio date power-menu
 
 wm-restack = bspwm
 
@@ -55,7 +56,10 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:100:...%
+label = %title%
+label-maxlen = 100
+format-foreground = ${colors.foreground}
+format-padding = 4
 
 [module/bspwm]
 type = internal/bspwm
@@ -119,35 +123,59 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date =
-date-alt = " %Y-%m-%d"
-
+date-alt = "%Y-%m-%d "
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground}
-format-underline = #0a6cf5
+format-background = ${colors.purple}
+format-foreground = ${colors.foreground}
+format-padding = 2
 
-label = %date% %time%
+label = %date%%time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
 format-volume = <label-volume>
-label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
+label-volume = vol %percentage%%
+label-volume-foreground = ${colors.foreground}
+format-volume-background = ${colors.blue}
+format-volume-padding = 2
 
 label-muted = muted
-label-muted-foreground = ${colors.gray}
+label-muted-foreground = ${colors.foreground}
+format-muted-background = ${colors.red}
+format-muted-padding = 2
+
+[module/power-menu]
+type = custom/menu
+expand-right = true
+
+label-open = :)
+label-open-background = ${colors.green}
+label-open-padding = 1
+
+label-close = cancel
+label-close-background = ${colors.green}
+label-close-padding = 1
+
+menu-0-0 = reboot
+menu-0-0-exec = reboot
+menu-0-0-background = ${colors.orange}
+menu-0-0-padding = 1
+
+menu-0-1 = shutdown
+menu-0-1-exec = shutdown now
+menu-0-1-background = ${colors.red}
+menu-0-1-padding = 1
 
 [settings]
 screenchange-reload = true
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-bottom = 0
 	
 ; vim:ft=dosini
