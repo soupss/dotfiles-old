@@ -1,0 +1,24 @@
+#!/bin/bash
+
+statefile=~/.night_state.txt
+state=$(<$statefile)
+if [ $# -gt 0 ]
+then
+	case "$1" in
+		label)
+			echo $state
+			;;
+		toggle)
+			if [ $state = night ]
+			then
+				redshift -x
+				echo day > $statefile
+			fi
+			if [ $state = day ]
+			then
+				redshift -O 1900 -P
+				echo night > $statefile
+			fi
+			;;
+	esac
+fi

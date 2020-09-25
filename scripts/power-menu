@@ -1,0 +1,10 @@
+a=$(echo -e "reboot\nshutdown" | rofi -dmenu -p 'power menu' -i -lines 2 -width 15 -location 2 -yoffset 33 -theme gruvbox-dark-soft -hide-scrollbar)
+
+if [ $a = "reboot" ]; then
+	reboot
+fi
+
+if [ $a = "shutdown" ]; then
+	shutdown now
+fi
+exit 0
