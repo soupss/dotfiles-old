@@ -1,21 +1,22 @@
 #!/bin/bash
 
+# daemons
+polybar top -r &
+sxhkd &
+
+# bspwm config
 bspc monitor -d 1 2 3 4 5
 
-bspc config border_width		4
+bspc config border_width		2
 bspc config normal_border_color		"#272727"
 bspc config focused_border_color	"#d79921"
 bspc config window_gap			30
 bspc config focus_follows_pointer	true
 
+bspc config single_monocle true
 bspc config borderless_monocle   true
 bspc config gapless_monocle	 true
 
-# polybar dissapears when polybar config is updated after bspwm is restarted with "bspwm wm -r", why?
-polybar top -r &
-pgrep -x sxhkd > /dev/null || sxhkd &
-
-# caps is esc
-setxkbmap -option caps:escape
-# cursor fix
+#
 xsetroot -cursor_name left_ptr
+setxkbmap -option caps:escape
