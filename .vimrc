@@ -15,41 +15,32 @@ call plug#end()
 
 " General settings
 set encoding=utf8
+filetype plugin indent on
 syntax enable
+set backspace=indent,eol,start
 set hidden
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
 set showmode showcmd
 set number relativenumber
-filetype plugin on
-set ruler
-set autoread
-set autoindent
+set cursorline
+set showmatch
+set matchpairs+=<:>
+set splitbelow splitright
+set ignorecase smartcase incsearch
 set nowrap
-set linebreak
-set softtabstop=4
-set shiftwidth=4
+set scrolloff=1
+set signcolumn=yes
 set wildmenu
 set wildmode=longest,full
 set path+=**
-set ignorecase
-set smartcase
-set incsearch
 set lazyredraw
-filetype indent on
-set splitbelow splitright
-set showmatch
 set noeb vb t_vb=
 set tm=500
-set matchpairs+=<:>
-set scrolloff=0
-set backspace=indent,eol,start
 set showbreak=\\ "
 set lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
-set list
-set cursorline
 set nobackup
 set nowritebackup
 set noswapfile
-set signcolumn=yes
 set updatetime=100
 set undofile
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
@@ -62,7 +53,6 @@ set t_Co=256
 set background=dark
 colorscheme gruvbox
 
-"custom
 function Highlights()
     hi! link SignColumn LineNr
     hi link GitGutterAdd GruvBoxAqua
