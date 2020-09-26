@@ -25,6 +25,13 @@ XF86AudioLowerVolume
 XF86AudioMute
 	pactl set-sink-mute 0 toggle
 
+# resize gaps
+super + {Up, Down}
+	bspc config -d focused window_gap $(( $(bspc config -d focused window_gap) {-, +} 10 ))
+
+super + 0
+	bspc config -d focused window_gap 0
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
