@@ -32,8 +32,8 @@ line-size = 0
 line-color = #0ff
 
 border-color = #00000000
-border-bottom-size = 5
-border-bottom-color = ${colors.aqua}
+;border-bottom-size = 5
+;border-bottom-color = ${colors.aqua}
 
 padding-right = 2
 
