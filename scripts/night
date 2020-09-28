@@ -8,6 +8,16 @@ then
 		label)
 			echo $state
 			;;
+		icon)
+			if [ $state = night ]
+			then
+				echo -ne "\uF186"  # moon
+			fi
+			if [ $state = day ]
+			then
+				echo -ne "\uF185"  # sun
+			fi
+			;;
 		toggle)
 			if [ $state = night ]
 			then
