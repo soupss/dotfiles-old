@@ -6,6 +6,7 @@
 * WM: bspwm
 * term: xfce4-terminal
 * font: Jetbrains Mono
+* panel: polybar
 
 #### screenshots
 
