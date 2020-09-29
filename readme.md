@@ -7,7 +7,7 @@
 * term: xfce4-terminal
 * font: Jetbrains Mono
 
-#### todo: screenshots
+#### screenshots
 
 ![screencap](https://i.imgur.com/n7xwM11.png)
 ![screencap](https://i.imgur.com/IFiRBRS.png)
