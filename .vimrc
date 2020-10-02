@@ -27,22 +27,18 @@ set showmatch
 set matchpairs+=<:>
 set splitbelow splitright
 set ignorecase smartcase incsearch
-set nowrap
+set wrap
 set scrolloff=1
 set signcolumn=yes
-set wildmenu
-set wildmode=longest,full
+set wildmenu wildmode=longest,full
 set path+=**
 set lazyredraw
 set noeb vb t_vb=
 set tm=500
 set showbreak=\\ "
-set lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
-set nobackup
-set nowritebackup
-set noswapfile
+set list lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
+set nobackup nowritebackup noswapfile undofile
 set updatetime=100
-set undofile
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
 let g:tex_flavor = 'latex'
 let g:Illuminate_delay = 100
@@ -106,13 +102,9 @@ nnoremap <Up> <C-w>+
 nnoremap <Down> <C-w>-
 nnoremap <Left> <C-w><
 nnoremap <Right> <C-w>>
-nnoremap <leader>s :set hlsearch! hlsearch?<cr>  " toggle search highlighting
+nnoremap <leader>s :set hlsearch! hlsearch?<cr>
 nnoremap <leader>l :set wrap! wrap?<cr>
-nnoremap <leader>w :b#<cr>  " last buffer
-" clear the screen then run the current python file
-au filetype python nnoremap <buffer> <F5> :w<cr>:!cls<cr>:exec '!python3 %'<cr>
-" clear the screen then run the parent python module (__main__ file in this dir)
-au filetype python nnoremap <buffer> <F6> :w<cr>:!cls<cr>:exec '!python3 .'<cr>
+nnoremap <leader>w :b#<cr>
 nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>g :Goyo<cr>
 " cleaner exit from insert/visual mode
@@ -122,7 +114,14 @@ inoremap <ESC> <C-c>
 nnoremap Q @@
 " delete without saving to register
 nnoremap s "_d
-
+" run current python file
+au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
+" run parent python module (__main__ file in this dir)
+au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
+" compile and run current c file
+au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
+" compile latex on save
+au BufWritePost *.tex exec '!pdflatex %'
 
 " goyo settings
 let g:goyo_width='45%'
