@@ -57,7 +57,7 @@ cursor-scroll = ns-resize
 [module/xwindow]
 type = internal/xwindow
 label = %title%
-label-empty = :)
+label-empty = 
 label-maxlen = 100
 format-foreground = ${colors.foreground}
 format-padding = 4
