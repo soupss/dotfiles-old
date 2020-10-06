@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
+    " Plug 'yggdroot/indentline'
 call plug#end()
 
 " General settings
@@ -33,16 +34,19 @@ set signcolumn=yes
 set wildmenu wildmode=longest,full
 set path+=**
 set lazyredraw
-set noeb vb t_vb=
+set noeb vb t_vb=  
 set tm=500
-set showbreak=\\ "
-set list lcs+=trail:-,extends:>,precedes:<,nbsp:~,eol:\ ,tab:\ \ 
+set list
+set lcs=space:·,extends:…,precedes:…,nbsp:~,trail:~,eol:§
+set fillchars+=vert:│,fold:-,diff:x
+set showbreak=+++\ 
 set nobackup nowritebackup noswapfile undofile
 set updatetime=100
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
 let g:tex_flavor = 'latex'
 let g:Illuminate_delay = 100
 let g:gitgutter_sign_removed = '-'
+let g:indentLine_char = '·'
 
 " colors
 set t_Co=256
