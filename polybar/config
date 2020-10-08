@@ -65,20 +65,19 @@ format-padding = 4
 [module/bspwm]
 type = internal/bspwm
 
-format = <label-state>   <label-mode>
-label-focused = 
+format = <label-state>  <label-mode>
+label-focused = %name%
 label-focused-background = ${colors.aqua}
 label-focused-padding = 2
 
-label-occupied = 
-label-occupied-padding = 2
+label-occupied = " %name%*"
+label-occupied-padding = 1
 
-label-urgent = 
+label-urgent = %name%!
 label-urgent-background = ${colors.yellow}
 label-urgent-padding = 2
 
-label-empty = 
-label-empty-foreground = ${colors.bg3}
+label-empty = %name%
 label-empty-padding = 2
 
 label-monocle = 
