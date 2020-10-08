@@ -37,8 +37,8 @@ set lazyredraw
 set noeb vb t_vb=  
 set tm=500
 set list
-set lcs=space:·,extends:…,precedes:…,nbsp:~,trail:~,eol:§
-set fillchars+=vert:│,fold:-,diff:x
+set lcs=tab:\|\ ,extends:…,precedes:…,nbsp:~,trail:~
+set fillchars+=vert:│,fold:\ ,diff:x
 set showbreak=+++\ 
 set nobackup nowritebackup noswapfile undofile
 set updatetime=100
