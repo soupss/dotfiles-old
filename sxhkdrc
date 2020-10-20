@@ -8,7 +8,7 @@ super + w
 
 # program launcher
 super + space
-	rofi -theme gruvbox-light -show run
+	rofi -theme gruvbox-dark -show run
 
 # power menu script
 super + shift + Escape
