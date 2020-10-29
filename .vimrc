@@ -34,12 +34,13 @@ set signcolumn=yes
 set wildmenu wildmode=longest,full
 set path+=**
 set lazyredraw
-set noeb vb t_vb=  
+set noeb vb t_vb= 
 set tm=500
 set list
-set lcs=tab:\|\ ,extends:…,precedes:…,nbsp:~,trail:~
+set lcs=extends:…,precedes:…,nbsp:~,trail:~
 set fillchars+=vert:│,fold:\ ,diff:x
 set showbreak=+++\ 
+set cpoptions+=n
 set nobackup nowritebackup noswapfile undofile
 set updatetime=100
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
@@ -124,6 +125,8 @@ au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
 au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
 " compile and run current c file
 au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
+" compile and run current c++ file
+au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
 
