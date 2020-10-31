@@ -1,6 +1,3 @@
-# Luke's (modified) config
-
-# Enable colors and change prompt:
 autoload -U colors && colors
 PS1="%B%F{yellow}%~ %(?.%F{blue}%#.%F{red}%#) %f%b"
 

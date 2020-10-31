@@ -1,16 +1,43 @@
 call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        let g:fzf_layout = { 'down': '40%' }
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'sheerun/vim-polyglot'
+        let g:tex_flavor = 'latex'
     Plug 'tpope/vim-markdown'
     Plug 'vim-scripts/indentpython.vim'
     Plug 'nvie/vim-flake8'
     Plug 'rrethy/vim-illuminate'
+        let g:Illuminate_delay = 100
     Plug 'junegunn/goyo.vim'
+        let g:goyo_width='45%'
+        let g:goyo_height='80%'
+        function! s:goyo_enter()
+            if executable('tmux') && strlen($TMUX)
+                silent !tmux set status off
+                silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+            endif
+            normal zz
+            set scrolloff=999
+            set noshowcmd
+        endfunction
+        function! s:goyo_leave()
+            if executable('tmux') && strlen($TMUX)
+                silent !tmux set status on
+                silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+            endif
+            set scrolloff=0
+            set showcmd
+            call Highlights()
+        endfunction
+        autocmd! User GoyoEnter nested call <SID>goyo_enter()
+        autocmd! User GoyoLeave nested call <SID>goyo_leave()
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
+        let g:gitgutter_sign_removed = '-'
+    Plug 'yegappan/taglist'
 call plug#end()
 
 " General settings
@@ -43,10 +70,6 @@ set cpoptions+=n
 set nobackup nowritebackup noswapfile undofile
 set updatetime=100
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
-let g:tex_flavor = 'latex'
-let g:Illuminate_delay = 100
-let g:gitgutter_sign_removed = '-'
-let g:indentLine_char = '·'
 
 " colors
 set t_Co=256
@@ -66,8 +89,6 @@ endfunction
 call Highlights()
 
 " Statusline
-" clear statusline highlight, still visible between splits
-" custom
 set laststatus=2
 set statusline=
 set statusline+=%#GruvboxRed#
@@ -110,7 +131,11 @@ nnoremap <leader>s :set hlsearch! hlsearch?<cr>
 nnoremap <leader>l :set wrap! wrap?<cr>
 nnoremap <leader>w :b#<cr>
 nnoremap <silent> <leader>o :Files<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>g :Goyo<cr>
+nnoremap <silent> <leader>t :TlistToggle<cr>
+nnoremap <silent> <leader>q :A<cr>
+nnoremap <silent> <leader>Q :AV<cr>
 " cleaner exit from insert/visual mode
 vnoremap <ESC> <C-c>
 inoremap <ESC> <C-c>
@@ -118,39 +143,23 @@ inoremap <ESC> <C-c>
 nnoremap Q @@
 " delete without saving to register
 nnoremap s "_d
-" run current python file
+" go to definition is now go to tag
+nnoremap gd <C-]>
+command WQ wq
+command Wq wq
+command W w
+command Q q
+" run current file
 au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
-" run parent python module (__main__ file in this dir)
+" run parent module (__main__ file in this dir)
 au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
+" c/c++
 " compile and run current c file
 au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
 " compile and run current c++ file
 au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr>
 " compile with makefile and run output (output must be named 'main')
-au filetype cpp nnoremap <F6> :w<cr>:!clear<cr>:exec '!make && ./main'<cr>
+"au filetype cpp nnoremap <F6> :w<cr>:!clear<cr>:exec '!make && ./main'<cr>
+au filetype cpp nnoremap <F6> :w<cr>:make!<cr>:exec '!clear && ./main'<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
-
-" goyo settings
-let g:goyo_width='45%'
-let g:goyo_height='80%'
-function! s:goyo_enter()
-    if executable('tmux') && strlen($TMUX)
-        silent !tmux set status off
-        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    endif
-    normal zz
-    set scrolloff=999
-    set noshowcmd
-endfunction
-function! s:goyo_leave()
-    if executable('tmux') && strlen($TMUX)
-        silent !tmux set status on
-        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    endif
-    set scrolloff=0
-    set showcmd
-    call Highlights()
-endfunction
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
