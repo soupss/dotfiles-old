@@ -11,7 +11,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
-    " Plug 'yggdroot/indentline'
 call plug#end()
 
 " General settings
@@ -37,7 +36,7 @@ set lazyredraw
 set noeb vb t_vb= 
 set tm=500
 set list
-set lcs=extends:…,precedes:…,nbsp:~,trail:~
+set lcs=tab:\ \ ,extends:…,precedes:…,nbsp:~,trail:~
 set fillchars+=vert:│,fold:\ ,diff:x
 set showbreak=+++\ 
 set cpoptions+=n
@@ -127,6 +126,8 @@ au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
 au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
 " compile and run current c++ file
 au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr>
+" compile with makefile and run output (output must be named 'main')
+au filetype cpp nnoremap <F6> :w<cr>:!clear<cr>:exec '!make && ./main'<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
 
