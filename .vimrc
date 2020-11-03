@@ -69,7 +69,12 @@ set showbreak=+++\
 set cpoptions+=n
 set nobackup nowritebackup noswapfile undofile
 set updatetime=100
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment when moving to a new line
+" Disable automatic comment when moving to a new line
+au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" correct hpp filetype
+au BufEnter *.hpp setlocal filetype=hpp syntax=cpp
+au BufEnter *.cpp let b:fswitchdst = 'hpp' | let b:fswitchlocs = '../inc'
+au BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
 
 " colors
 set t_Co=256
@@ -115,7 +120,7 @@ augroup END
 
 " keybinds
 let mapleader = ' '
-nnoremap <F4> :so $MYVIMRC<cr>
+nnoremap <F2> :so $MYVIMRC<cr>
 nnoremap Y y$  " why is this not default
 " move between splits
 nnoremap <C-h> <C-w>h
@@ -134,8 +139,9 @@ nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>g :Goyo<cr>
 nnoremap <silent> <leader>t :TlistToggle<cr>
-nnoremap <silent> <leader>q :A<cr>
-nnoremap <silent> <leader>Q :AV<cr>
+nnoremap <silent> <leader>q :FSHere<cr>
+au filetype cpp nnoremap <buffer> <silent> <leader>Q :FSSplitLeft<cr>
+au filetype hpp nnoremap <buffer> <silent> <leader>Q :FSSplitRight<cr>
 " cleaner exit from insert/visual mode
 vnoremap <ESC> <C-c>
 inoremap <ESC> <C-c>
@@ -149,6 +155,7 @@ command WQ wq
 command Wq wq
 command W w
 command Q q
+" python
 " run current file
 au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
 " run parent module (__main__ file in this dir)
@@ -158,8 +165,9 @@ au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
 au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
 " compile and run current c++ file
 au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr>
-" compile with makefile and run output (output must be named 'main')
-"au filetype cpp nnoremap <F6> :w<cr>:!clear<cr>:exec '!make && ./main'<cr>
-au filetype cpp nnoremap <F6> :w<cr>:make!<cr>:exec '!clear && ./main'<cr>
+" compile with makefile
+au filetype cpp nnoremap <leader><F6> :wa<cr>:!clear && make<cr>
+" run ./main
+au filetype cpp nnoremap <F6> :!clear && ./main<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
