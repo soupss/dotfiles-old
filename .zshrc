@@ -25,6 +25,7 @@ bindkey -M menuselect '^j' vi-down-line-or-history
 alias ls="ls -FNh --color=auto --group-directories-first"
 alias o="xdg-open"
 alias starwars="telnet towel.blinkenlights.nl"
+alias tree="tree -FC --dirsfirst -I .git"
 
 # Highlight section titles in manual pages.
 export LESS_TERMCAP_md="${yellow}";
