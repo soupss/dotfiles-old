@@ -1,5 +1,6 @@
 autoload -U colors && colors
 PS1="%B%F{yellow}%~ %(?.%F{blue}%#.%F{red}%#) %f%b"
+export EDITOR="/usr/bin/vim"
 
 # History in cache directory:
 HISTSIZE=10000
