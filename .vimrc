@@ -168,6 +168,7 @@ au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr
 " compile with makefile
 au filetype cpp nnoremap <leader><F6> :wa<cr>:!clear && make<cr>
 " run ./main
-au filetype cpp nnoremap <F6> :!clear && ./main<cr>
+au filetype cpp nnoremap <F6> :!clear && ./bin/debug/main<cr>
+au filetype cpp nnoremap <F7> :!clear && ./bin/release/main<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
