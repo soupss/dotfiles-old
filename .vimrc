@@ -37,12 +37,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
         let g:gitgutter_sign_removed = '-'
+    Plug 'yegappan/taglist'
 call plug#end()
 
 " General settings
 set encoding=utf8
 filetype plugin indent on
-syntax enable
+syntax on
 set backspace=indent,eol,start
 set hidden
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
@@ -70,16 +71,19 @@ set nobackup nowritebackup noswapfile undofile
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " correct hpp filetype
 au BufEnter *.hpp setlocal filetype=hpp syntax=cpp
+" when sourcing vimrc in hpp file
+if (&ft == 'hpp')
+    setlocal filetype=hpp syntax=cpp
+endif
 au BufEnter *.cpp let b:fswitchdst = 'hpp' | let b:fswitchlocs = '../inc'
 au BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
 " cscope
 set cscopetag
-if filereadable("cscope.out")
-    cs add cscope.out
+if filereadable("./index/cscope.out")
+    cs add .index/cscope.out
 elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
 endif
-set cscopeverbose
 
 
 " colors
@@ -156,11 +160,11 @@ nnoremap Q @@
 " delete without saving to register
 nnoremap s "_d
 " go to definition is now go to tag
-nnoremap gd <C-]>
 command WQ wq
 command Wq wq
 command W w
 command Q q
+nmap gs ysiw
 " python
 " run current file
 au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
@@ -179,18 +183,21 @@ au filetype cpp nnoremap <F7> :!clear && ./bin/release/main<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
 " use -Rbq for large projects, !creates 2 additional files: cscope.in.out & cscope.po.out
-nnoremap <f3> :!cscope -Rb<cr>:cs reset<cr><cr>
+" ':cs reset' doesnt add new db
+nnoremap <f3> :!mkdir -p .index && cscope -Rb -f .index/cscope.out<cr>:cs kill -1<cr>:cs add .index/cscope.out<cr>
 " find definition
-nnoremap gd :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>d :cs find g <C-R>=expand("<cword>")<CR><CR>
 " find calls, where function is being used
-nnoremap gu :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 " find text
-nnoremap gt :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 " find exact (egrep)
-nnoremap ge :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 " open file
-nnoremap gf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 " find files that include the filename
-nnoremap gi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " find files that include current file
-nnoremap gI :cs find i %:t<cr>
+nnoremap <leader>I :cs find i %:t<cr>
+noremap Zz <c-w>_ \| <c-w>\|
+noremap Zo <c-w>=
