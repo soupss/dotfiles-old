@@ -37,7 +37,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
         let g:gitgutter_sign_removed = '-'
-    Plug 'yegappan/taglist'
 call plug#end()
 
 " General settings
@@ -61,20 +60,27 @@ set wildmenu wildmode=longest,full
 set path+=**
 set lazyredraw
 set noeb vb t_vb= 
-set tm=500
-set list
-set lcs=tab:\ \ ,extends:…,precedes:…,nbsp:~,trail:~
+set notimeout ttimeout
+set list lcs=tab:\ \ ,extends:…,precedes:…,nbsp:~,trail:~
 set fillchars+=vert:│,fold:\ ,diff:x
 set showbreak=+++\ 
 set cpoptions+=n
 set nobackup nowritebackup noswapfile undofile
-set updatetime=100
 " Disable automatic comment when moving to a new line
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " correct hpp filetype
 au BufEnter *.hpp setlocal filetype=hpp syntax=cpp
 au BufEnter *.cpp let b:fswitchdst = 'hpp' | let b:fswitchlocs = '../inc'
 au BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
+" cscope
+set cscopetag
+if filereadable("cscope.out")
+    cs add cscope.out
+elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+endif
+set cscopeverbose
+
 
 " colors
 set t_Co=256
@@ -172,3 +178,19 @@ au filetype cpp nnoremap <F6> :!clear && ./bin/debug/main<cr>
 au filetype cpp nnoremap <F7> :!clear && ./bin/release/main<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
+" use -Rbq for large projects, !creates 2 additional files: cscope.in.out & cscope.po.out
+nnoremap <f3> :!cscope -Rb<cr>:cs reset<cr><cr>
+" find definition
+nnoremap gd :cs find g <C-R>=expand("<cword>")<CR><CR>
+" find calls, where function is being used
+nnoremap gu :cs find c <C-R>=expand("<cword>")<CR><CR>
+" find text
+nnoremap gt :cs find t <C-R>=expand("<cword>")<CR><CR>
+" find exact (egrep)
+nnoremap ge :cs find e <C-R>=expand("<cword>")<CR><CR>
+" open file
+nnoremap gf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+" find files that include the filename
+nnoremap gi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" find files that include current file
+nnoremap gI :cs find i %:t<cr>
