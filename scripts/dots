@@ -1,5 +1,4 @@
 #!/bin/bash
-#:)
 
 dots=~/Dev/Repos/dotfiles
 scripts=~/.local/bin
@@ -33,7 +32,8 @@ do
 			git add -A
 			if [ $# -eq 1 ]
 			then
-                msg=$(git diff | grep '^[+][^+]' | head -n 1)
+                msg=$(git diff --cached | grep '^[+][^+]' | head -n 1)
+                [ -z "${msg}" ] && echo "empty"
 				git commit -m "${msg}" && echo "automatic commit msg=\"${msg}\"" && git push
 			else
 				git commit -m "$2" && git push
