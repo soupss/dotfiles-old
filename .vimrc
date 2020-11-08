@@ -79,7 +79,7 @@ au BufEnter *.cpp let b:fswitchdst = 'hpp' | let b:fswitchlocs = '../inc'
 au BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
 " cscope
 set cscopetag
-if filereadable("./index/cscope.out")
+if filereadable(".index/cscope.out")
     cs add .index/cscope.out
 elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
@@ -131,12 +131,15 @@ augroup END
 " keybinds
 let mapleader = ' '
 nnoremap <F2> :so $MYVIMRC<cr>
-nnoremap Y y$  " why is this not default
+nnoremap Y y$
 " move between splits
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
+" split zoom
+noremap Zz <c-w>_ \| <c-w>\|
+noremap Zo <c-w>=
 " resize splits
 nnoremap <Up> <C-w>+
 nnoremap <Down> <C-w>-
@@ -158,19 +161,22 @@ inoremap <ESC> <C-c>
 " repeat last macro instead of ex mode
 nnoremap Q @@
 " delete without saving to register
+" verb: suck (to void)
 nnoremap s "_d
-" go to definition is now go to tag
 command WQ wq
 command Wq wq
 command W w
 command Q q
+" add numbered j/k to jumplist
+nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
+nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nmap gs ysiw
-" python
+" PYTHON
 " run current file
 au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
 " run parent module (__main__ file in this dir)
 au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
-" c/c++
+" C/C++
 " compile and run current c file
 au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
 " compile and run current c++ file
@@ -182,22 +188,27 @@ au filetype cpp nnoremap <F6> :!clear && ./bin/debug/main<cr>
 au filetype cpp nnoremap <F7> :!clear && ./bin/release/main<cr>
 " compile latex on save
 au BufWritePost *.tex exec '!pdflatex %'
+" CSCOPE MAPPINGS
 " use -Rbq for large projects, !creates 2 additional files: cscope.in.out & cscope.po.out
 " ':cs reset' doesnt add new db
 nnoremap <f3> :!mkdir -p .index && cscope -Rb -f .index/cscope.out<cr>:cs kill -1<cr>:cs add .index/cscope.out<cr>
-" find definition
+" lower case = under cursor
+" upper case = search
+" find function definition
 nnoremap <leader>d :cs find g <C-R>=expand("<cword>")<CR><CR>
-" find calls, where function is being used
+nnoremap <leader>D :cs find g 
+" find variable definition: where a symbol gets assigned a value
+nnoremap <leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>A :cs find a 
+" find calls: where function is being used
 nnoremap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-" find text
-nnoremap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>C :cs find c 
 " find exact (egrep)
 nnoremap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>E :cs find e 
 " open file
 nnoremap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 " find files that include the filename
 nnoremap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " find files that include current file
 nnoremap <leader>I :cs find i %:t<cr>
-noremap Zz <c-w>_ \| <c-w>\|
-noremap Zo <c-w>=
