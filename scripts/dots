@@ -1,5 +1,6 @@
 #!/bin/bash
-# :0)
+# automatically sync config files with git
+# automatic commit msg is first line added or first line deleted if no additions were made
 
 dots=~/Dev/Repos/dotfiles
 scripts=~/.local/bin
@@ -9,7 +10,8 @@ then
 	echo "no flags supplied"
 	echo "available flags:"
 	echo "-s 			sync dotfiles with local dotfiles git repo"
-	echo "-p COMMIT_MSG 		push changes to remote git repo, optional msg"
+	echo "-p COMMIT_MSG 		push changes to remote git repo"
+	echo "                      if COMMIT_MSG is empty, automatically generate commit msg"
 else
 	cd ${dots}
 fi
@@ -41,9 +43,9 @@ do
 			then
                 msg=$(git diff --cached | grep '^[+][^+]' | head -n 1 | xargs)
                 [ -z "${msg}" ] && msg=$(git diff --cached | grep '^[-][^-]' | head -n 1 | xargs)
-				git commit -m "${msg}" && echo "automatic commit msg=\"${msg}\""
+				git commit -m "${msg}" && echo "automatic commit msg=\"${msg}\"" && git push
 			else
-				git commit -m "$2"
+				git commit -m "$2" && git push
 			fi
 			shift
 			;;
