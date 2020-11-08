@@ -1,4 +1,5 @@
 #!/bin/bash
+# :0)
 
 dots=~/Dev/Repos/dotfiles
 scripts=~/.local/bin
@@ -25,7 +26,13 @@ do
 			cp ~/.zshrc ${dots}
 			cp ~/.tmux.conf ${dots}
 			cp ${scripts}/* ${dots}/scripts
-			git diff --compact-summary
+            changes=$(git diff --compact-summary)
+            if [ -z "${changes}" ]
+            then
+                echo "no changes to dotfiles"
+            else
+                echo "${changes}"
+            fi
 			shift
 			;;
 		-p|--push)
@@ -33,10 +40,10 @@ do
 			if [ $# -eq 1 ]
 			then
                 msg=$(git diff --cached | grep '^[+][^+]' | head -n 1 | xargs)
-                [ -z "${msg}" ] && echo "empty"
-				git commit -m "${msg}" && echo "automatic commit msg=\"${msg}\"" && git push
+                [ -z "${msg}" ] && msg=$(git diff --cached | grep '^[-][^-]' | head -n 1 | xargs)
+				git commit -m "${msg}" && echo "automatic commit msg=\"${msg}\""
 			else
-				git commit -m "$2" && git push
+				git commit -m "$2"
 			fi
 			shift
 			;;
