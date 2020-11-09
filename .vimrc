@@ -150,7 +150,7 @@ nnoremap <leader>l :set wrap! wrap?<cr>
 nnoremap <leader>w :b#<cr>
 nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
-nnoremap <silent> <leader>g :Goyo<cr>
+nnoremap <silent> <leader><leader>g :Goyo<cr>
 nnoremap <silent> <leader>t :TlistToggle<cr>
 nnoremap <silent> <leader>q :FSHere<cr>
 au filetype cpp nnoremap <buffer> <silent> <leader>Q :FSSplitLeft<cr>
@@ -163,6 +163,8 @@ nnoremap Q @@
 " delete without saving to register
 " verb: suck (to void)
 nnoremap s "_d
+nnoremap S "_d$
+nnoremap , za
 command WQ wq
 command Wq wq
 command W w
@@ -171,23 +173,6 @@ command Q q
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nmap gs ysiw
-" PYTHON
-" run current file
-au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
-" run parent module (__main__ file in this dir)
-au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
-" C/C++
-" compile and run current c file
-au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
-" compile and run current c++ file
-au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr>
-" compile with makefile
-au filetype cpp nnoremap <leader><F6> :wa<cr>:!clear && make<cr>
-" run ./main
-au filetype cpp nnoremap <F6> :!clear && ./bin/debug/main<cr>
-au filetype cpp nnoremap <F7> :!clear && ./bin/release/main<cr>
-" compile latex on save
-au BufWritePost *.tex exec '!pdflatex %'
 " CSCOPE MAPPINGS
 " use -Rbq for large projects, !creates 2 additional files: cscope.in.out & cscope.po.out
 " ':cs reset' doesnt add new db
@@ -212,3 +197,21 @@ nnoremap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " find files that include current file
 nnoremap <leader>I :cs find i %:t<cr>
+" COMPILING/RUNNING
+" PYTHON
+" run current file
+au filetype python nnoremap <F5> :w<cr>:!clear<cr>:exec '!python3 %'<cr>
+" run parent module (__main__ file in this dir)
+au filetype python nnoremap <F6> :w<cr>:!clear<cr>:exec '!python3 .'<cr>
+" C/C++
+" compile and run current c file
+au filetype c nnoremap <F5> :w<cr>:!clear<cr>:exec '!gcc % -o %:r && ./%:r'<cr>
+" compile and run current c++ file
+au filetype cpp nnoremap <F5> :w<cr>:!clear<cr>:exec '!g++ % -o %:r && ./%:r'<cr>
+" compile with makefile
+au filetype cpp nnoremap <leader><F6> :wa<cr>:!clear && make<cr>
+" run ./main
+au filetype cpp nnoremap <F6> :!clear && ./bin/debug/main<cr>
+au filetype cpp nnoremap <F7> :!clear && ./bin/release/main<cr>
+" compile latex on save
+au BufWritePost *.tex exec '!pdflatex %'
