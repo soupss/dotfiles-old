@@ -81,6 +81,8 @@ au BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
 set cscopetag
 if filereadable(".index/cscope.out")
     cs add .index/cscope.out
+    " update cscope db on save  !use f3 mapping instead
+    " au BufWritePost * !cscope -Rb -f .index/cscope.out
 elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
 endif
