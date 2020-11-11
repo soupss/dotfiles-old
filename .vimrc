@@ -99,26 +99,33 @@ function Highlights()
     hi link GitGutterChange GruvBoxYellow
     hi link GitGutterDelete GruvBoxRed
     hi link GitGutterChangeDelete GruvBoxOrange
-    hi StatusLine cterm=NONE ctermfg=NONE ctermbg=NONE
-    hi StatusLineNC cterm=NONE ctermfg=NONE ctermbg=NONE
     hi illuminatedWord cterm=reverse
 endfunction
 call Highlights()
 
+
+hi GruvboxRedReverse cterm=reverse ctermfg=167
+hi GruvboxGreenReverse cterm=reverse ctermfg=142
+hi GruvboxYellowReverse cterm=reverse ctermfg=214
+hi GruvboxBlueReverse cterm=reverse ctermfg=109
+hi GruvboxPurpleReverse cterm=reverse ctermfg=175
+hi GruvboxAquaReverse cterm=reverse ctermfg=108
+
 " Statusline
 set laststatus=2
 set statusline=
-set statusline+=%#GruvboxRed#
-set statusline+=\ %M  " modified flag
-set statusline+=%#GruvboxGreen#
-set statusline+=%t  " filename
-set statusline+=%#GruvboxBlue#
+set statusline+=%#GruvboxRedReverse#
+set statusline+=%M  " modified flag
+set statusline+=%#GruvboxGreenReverse#
+set statusline+=\ %t\   " filename
+set statusline+=%#GruvboxBlueReverse#
 set statusline+=\ %y\   " filetype
-set statusline+=%#LineNr# " bar color
+set statusline+=%#GruvBoxFg0# " bar color
+set statusline+=%{v:register} "Right side settings
 set statusline+=%= "Right side settings
-set statusline+=%#GruvboxPurple#
-set statusline+=\ line\ %l
-set statusline+=%#GruvboxAqua#
+set statusline+=%#GruvboxPurpleReverse#
+set statusline+=\ line\ %l\ 
+set statusline+=%#GruvboxAquaReverse#
 set statusline+=\ of\ %L\ 
 
 " only show cursorline on current split
@@ -166,7 +173,6 @@ nnoremap Q @@
 " verb: suck (to void)
 nnoremap s "_d
 nnoremap S "_d$
-nnoremap , za
 command WQ wq
 command Wq wq
 command W w
