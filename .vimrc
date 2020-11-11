@@ -99,6 +99,8 @@ function Highlights()
     hi link GitGutterChange GruvBoxYellow
     hi link GitGutterDelete GruvBoxRed
     hi link GitGutterChangeDelete GruvBoxOrange
+    hi StatusLine cterm=none ctermbg=none
+    hi StatusLineNC cterm=none ctermbg=none
     hi illuminatedWord cterm=reverse
 endfunction
 call Highlights()
@@ -115,14 +117,15 @@ hi GruvboxAquaReverse cterm=reverse ctermfg=108
 set laststatus=2
 set statusline=
 set statusline+=%#GruvboxRedReverse#
-set statusline+=%M  " modified flag
+set statusline+=%m%r  " modified flag
 set statusline+=%#GruvboxGreenReverse#
 set statusline+=\ %t\   " filename
 set statusline+=%#GruvboxBlueReverse#
-set statusline+=\ %y\   " filetype
+set statusline+=\ %Y\   " filetype
 set statusline+=%#GruvBoxFg0# " bar color
-set statusline+=%{v:register} "Right side settings
+set statusline+=\ %F   " filename
 set statusline+=%= "Right side settings
+set statusline+=%{v:register}\  "Right side settings
 set statusline+=%#GruvboxPurpleReverse#
 set statusline+=\ line\ %l\ 
 set statusline+=%#GruvboxAquaReverse#
@@ -139,7 +142,7 @@ augroup END
 
 " keybinds
 let mapleader = ' '
-nnoremap <F2> :so $MYVIMRC<cr>
+nnoremap <F2> :bufdo so $MYVIMRC<cr>
 nnoremap Y y$
 " move between splits
 nnoremap <C-h> <C-w>h
@@ -149,6 +152,19 @@ nnoremap <C-j> <C-w>j
 " split zoom
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
+" repeat last macro instead of ex mode
+nnoremap Q @@
+" delete without saving to register
+" verb: suck (to void)
+nnoremap s "_d
+nnoremap S "_d$
+command WQ wq
+command Wq wq
+command W w
+command Q q
+nmap gs ysiw
+" go to unsaved buffer
+nnoremap <leader><cr> :bm<cr>
 " resize splits
 nnoremap <Up> <C-w>+
 nnoremap <Down> <C-w>-
@@ -167,20 +183,9 @@ au filetype hpp nnoremap <buffer> <silent> <leader>Q :FSSplitRight<cr>
 " cleaner exit from insert/visual mode
 vnoremap <ESC> <C-c>
 inoremap <ESC> <C-c>
-" repeat last macro instead of ex mode
-nnoremap Q @@
-" delete without saving to register
-" verb: suck (to void)
-nnoremap s "_d
-nnoremap S "_d$
-command WQ wq
-command Wq wq
-command W w
-command Q q
 " add numbered j/k to jumplist
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
-nmap gs ysiw
 " CSCOPE MAPPINGS
 " use -Rbq for large projects, !creates 2 additional files: cscope.in.out & cscope.po.out
 " ':cs reset' doesnt add new db
