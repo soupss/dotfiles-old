@@ -80,6 +80,7 @@ au BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
 " cscope
 set cscopetag
 if filereadable(".index/cscope.out")
+    silent !cscope -Rb -f .index/cscope.out
     cs add .index/cscope.out
     " update cscope db on save  !use f3 mapping instead
     " au BufWritePost * !cscope -Rb -f .index/cscope.out
@@ -194,22 +195,33 @@ nnoremap <f3> :!mkdir -p .index && cscope -Rb -f .index/cscope.out<cr>:cs kill -
 " upper case = search
 " find function definition
 nnoremap <leader>d :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>d :vert scs find g <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>D :cs find g 
+nnoremap <leader><leader>D :vert scs find g 
 " find variable definition: where a symbol gets assigned a value
 nnoremap <leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>a :vert scs find a <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>A :cs find a 
+nnoremap <leader><leader>A :vert scs find a 
 " find calls: where function is being used
 nnoremap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>C :cs find c 
+nnoremap <leader><leader>C :vert scs find c 
 " find exact (egrep)
 nnoremap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader><leader>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>E :cs find e 
+nnoremap <leader><leader>E :vert scs find e 
 " open file
 nnoremap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <leader><leader>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
 " find files that include the filename
 nnoremap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <leader><leader>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " find files that include current file
 nnoremap <leader>I :cs find i %:t<cr>
+nnoremap <leader><leader>I :vert scs find i %:t<cr>
 " COMPILING/RUNNING
 " PYTHON
 " run current file
