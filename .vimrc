@@ -118,15 +118,16 @@ hi GruvboxAquaReverse cterm=reverse ctermfg=108
 set laststatus=2
 set statusline=
 set statusline+=%#GruvboxRedReverse#
-set statusline+=%m%r  " modified flag
+set statusline+=%m%r
 set statusline+=%#GruvboxGreenReverse#
-set statusline+=\ %t\   " filename
+set statusline+=\ %t\ 
 set statusline+=%#GruvboxBlueReverse#
-set statusline+=\ %Y\   " filetype
+set statusline+=\ %Y\ 
 set statusline+=%#GruvBoxFg0# " bar color
-set statusline+=\ %F   " filename
+set statusline+=\ %F
 set statusline+=%= "Right side settings
-set statusline+=%{v:register}\  "Right side settings
+set statusline+=%c\ 
+set statusline+=%{v:register}\ 
 set statusline+=%#GruvboxPurpleReverse#
 set statusline+=\ line\ %l\ 
 set statusline+=%#GruvboxAquaReverse#
