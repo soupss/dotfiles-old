@@ -66,6 +66,8 @@ set list lcs=tab:\ \ ,extends:…,precedes:…,nbsp:~,trail:~
 set fillchars+=vert:│,fold:\ ,diff:x
 set showbreak=+++\ 
 set cpoptions+=n
+" show search result index+count
+set shortmess-=S
 set nobackup nowritebackup noswapfile undofile
 " Disable automatic comment when moving to a new line
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -146,6 +148,9 @@ augroup END
 let mapleader = ' '
 nnoremap <F2> :bufdo so $MYVIMRC<cr>
 nnoremap Y y$
+" move to prev/next function
+nnoremap + ]m
+nnoremap - [m
 " move between splits
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
