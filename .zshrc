@@ -15,6 +15,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
+# autocomplete . and .. (special dirs)
+zstyle ':completion:*' special-dirs true
 
 # Use ctrl-vim keys in tab complete menu:
 bindkey -M menuselect '^h' vi-backward-char
