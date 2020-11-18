@@ -6,13 +6,17 @@ super + Return
 super + w
 	firefox
 
+# mail
+super + e
+	thunderbird
+
 # program launcher
 super + space
 	rofi -theme gruvbox-dark -show run
 
-# power menu script
-super + shift + Escape
-	power-menu
+# shutdown
+super + shift + ctrl + Escape
+	shutdown now
 
 # volume
 XF86Audio{Raise,Lower}Volume
