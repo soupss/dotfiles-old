@@ -8,7 +8,7 @@ yellow = #d79921
 blue = #458588
 purple = #b16286
 aqua = #689d6a
-gray = #928374
+gray = #a89984
 orange = #d65d0e
 lightred = #fb4934
 lightgreen = #b8bb26
@@ -34,7 +34,7 @@ line-color = #0ff
 
 border-color = #00000000
 border-bottom-size = 3
-border-bottom-color = ${colors.aqua}
+border-bottom-color = ${colors.lightpurple}
 
 padding-right = 0
 
@@ -67,7 +67,7 @@ type = internal/bspwm
 
 format = <label-state>  <label-mode>
 label-focused = %name%
-label-focused-background = ${colors.aqua}
+label-focused-background = ${colors.lightpurple}
 label-focused-padding = 2
 
 label-occupied = " %name%*"
@@ -132,8 +132,7 @@ date-alt = " %d/%m-%Y "
 time =  %H:%M
 time-alt =  %H:%M:%S
 
-format-background = ${colors.purple}
-format-foreground = ${colors.foreground}
+format-background = ${colors.blue}
 format-padding = 2
 
 label = %date%%time%
@@ -146,7 +145,7 @@ sink = alsa_output.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo
 format-volume =  <label-volume>
 label-volume = %percentage%%
 label-volume-foreground = ${colors.foreground}
-format-volume-background = ${colors.blue}
+format-volume-background = ${colors.aqua}
 format-volume-padding = 2
 
 label-muted =  muted
@@ -158,11 +157,11 @@ type = custom/menu
 expand-right = false
 
 label-open = 
-label-open-background = ${colors.aqua}
+label-open-background = ${colors.lightpurple}
 label-open-padding = 2
 
 label-close = 
-label-close-background = ${colors.aqua}
+label-close-background = ${colors.lightpurple}
 label-close-padding = 2
 
 menu-0-0 =  reboot
