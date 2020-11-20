@@ -55,7 +55,7 @@ set matchpairs+=<:>
 set splitbelow splitright
 set ignorecase smartcase incsearch
 set wrap
-set scrolloff=1
+set scrolloff=2
 set signcolumn=yes
 set wildmenu wildmode=longest,full
 set path+=**
@@ -120,20 +120,19 @@ hi GruvboxAquaReverse cterm=reverse ctermfg=108
 set laststatus=2
 set statusline=
 set statusline+=%#GruvboxRedReverse#
-set statusline+=%m%r
+set statusline+=%m%r " modified and readonly flag
 set statusline+=%#GruvboxGreenReverse#
-set statusline+=\ %t\ 
+set statusline+=\ %t\  " file name (path tail)
 set statusline+=%#GruvboxBlueReverse#
-set statusline+=\ %Y\ 
+set statusline+=\ %Y\  " file type
 set statusline+=%#GruvBoxFg0# " bar color
-set statusline+=\ %F
+set statusline+=%<\ %F " full file path
 set statusline+=%= "Right side settings
-set statusline+=%c\ 
-set statusline+=%{v:register}\ 
+set statusline+=%c\  " column
 set statusline+=%#GruvboxPurpleReverse#
-set statusline+=\ line\ %l\ 
+set statusline+=\ line\ %l\  " current line number
 set statusline+=%#GruvboxAquaReverse#
-set statusline+=\ of\ %L\ 
+set statusline+=\ of\ %L\  " total lines
 
 " only show cursorline on current split
 augroup CursorLine
