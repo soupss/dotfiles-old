@@ -70,6 +70,7 @@ set cpoptions+=n
 set shortmess-=S
 set nobackup nowritebackup noswapfile undofile
 set foldmethod=syntax
+set foldlevel=1
 set foldnestmax=1 "dont fold nested
 set foldminlines=0
 " switch to manual foldmethod in insert mode, fixes unwanted behaviour where folds open in insert mode
