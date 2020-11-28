@@ -22,7 +22,7 @@ lightorange = #fe8019
 [bar/top]
 monitor = DVI-D-0
 width = 100%
-height = 26
+height = 20
 radius = 0
 fixed-center = true
 
@@ -34,7 +34,7 @@ line-color = #0ff
 
 border-color = #00000000
 border-bottom-size = 3
-border-bottom-color = ${colors.lightpurple}
+border-bottom-color = ${colors.purple}
 
 padding-right = 0
 
@@ -65,9 +65,9 @@ format-padding = 4
 [module/bspwm]
 type = internal/bspwm
 
-format = <label-state>  <label-mode>
+format = <label-state>
 label-focused = %name%
-label-focused-background = ${colors.lightpurple}
+label-focused-background = ${colors.purple}
 label-focused-padding = 2
 
 label-occupied = " %name%*"
@@ -79,11 +79,6 @@ label-urgent-padding = 2
 
 label-empty = %name%
 label-empty-padding = 2
-
-label-monocle = 
-label-tiled = 
-label-fullscreen = 
-label-floating = "  "
 
 [module/wlan]
 type = internal/network
@@ -157,11 +152,11 @@ type = custom/menu
 expand-right = false
 
 label-open = 
-label-open-background = ${colors.lightpurple}
+label-open-background = ${colors.purple}
 label-open-padding = 2
 
 label-close = 
-label-close-background = ${colors.lightpurple}
+label-close-background = ${colors.purple}
 label-close-padding = 2
 
 menu-0-0 =  reboot

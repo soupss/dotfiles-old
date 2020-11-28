@@ -29,6 +29,7 @@ alias ls="ls -FNh --color=auto --group-directories-first"
 alias o="xdg-open"
 alias starwars="telnet towel.blinkenlights.nl"
 alias tree="tree -FC --dirsfirst -I .git"
+alias vimrc="vim ~/.vimrc"
 
 # Highlight section titles in manual pages.
 export LESS_TERMCAP_md="${yellow}";

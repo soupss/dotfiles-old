@@ -69,6 +69,12 @@ set cpoptions+=n
 " show search result index+count
 set shortmess-=S
 set nobackup nowritebackup noswapfile undofile
+set foldmethod=syntax
+set foldnestmax=1 "dont fold nested
+set foldminlines=0
+" switch to manual foldmethod in insert mode, fixes unwanted behaviour where folds open in insert mode
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 " Disable automatic comment when moving to a new line
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " correct hpp filetype
@@ -164,6 +170,7 @@ nnoremap Q @@
 " verb: suck (to void)
 nnoremap s "_d
 nnoremap S "_d$
+nnoremap ss "_dd
 command WQ wq
 command Wq wq
 command W w
