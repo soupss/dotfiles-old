@@ -2,10 +2,9 @@
 
 * OS: Manjaro
 * Shell: zsh
-* DE: Xfce
 * WM: bspwm
-* term: xfce4-terminal
-* font: Jetbrains Mono
+* term: alacritty
+* font: Jetbrains Mono NL
 * panel: polybar
 
 #### screenshots

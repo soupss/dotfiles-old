@@ -103,6 +103,7 @@ set t_Co=256
 set background=dark
 colorscheme gruvbox
 
+" put highlights here
 function Highlights()
     hi! link SignColumn LineNr
     hi link GitGutterAdd GruvBoxAqua
@@ -112,9 +113,9 @@ function Highlights()
     hi StatusLine cterm=none ctermbg=none
     hi StatusLineNC cterm=none ctermbg=none
     hi illuminatedWord cterm=reverse
+    hi Folded ctermbg=236
 endfunction
 call Highlights()
-
 
 hi GruvboxRedReverse cterm=reverse ctermfg=167
 hi GruvboxGreenReverse cterm=reverse ctermfg=142
@@ -122,6 +123,7 @@ hi GruvboxYellowReverse cterm=reverse ctermfg=214
 hi GruvboxBlueReverse cterm=reverse ctermfg=109
 hi GruvboxPurpleReverse cterm=reverse ctermfg=175
 hi GruvboxAquaReverse cterm=reverse ctermfg=108
+hi GruvboxOrangeReverse cterm=reverse ctermfg=208
 
 " Statusline
 set laststatus=2
@@ -135,7 +137,8 @@ set statusline+=\ %Y\  " file type
 set statusline+=%#GruvBoxFg0# " bar color
 set statusline+=%<\ %F " full file path
 set statusline+=%= "Right side settings
-set statusline+=%c\  " column
+set statusline+=%#GruvboxYellowReverse#
+" set statusline+=\ col\ %c\  " column
 set statusline+=%#GruvboxPurpleReverse#
 set statusline+=\ line\ %l\  " current line number
 set statusline+=%#GruvboxAquaReverse#
@@ -154,9 +157,6 @@ augroup END
 let mapleader = ' '
 nnoremap <F2> :bufdo so $MYVIMRC<cr>
 nnoremap Y y$
-" move to prev/next function
-nnoremap + ]m
-nnoremap - [m
 " move between splits
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
@@ -179,7 +179,11 @@ command Q q
 nmap gs ysiw
 " go to unsaved buffer
 nnoremap <leader><cr> :bm<cr>
-" resize splits
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+" resize splits with arrow keys
 nnoremap <Up> <C-w>+
 nnoremap <Down> <C-w>-
 nnoremap <Left> <C-w><
