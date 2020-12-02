@@ -23,7 +23,6 @@ do
 			mkdir -p -v ${dots}/polybar ${dots}/scripts
 			cp ~/.config/bspwm/bspwmrc ${dots}
 			cp ~/.config/sxhkd/sxhkdrc ${dots}
-			cp ~/.config/alacritty/alacritty.yml ${dots}
 			cp ~/.config/polybar/* ${dots}/polybar
 			cp ~/.vimrc ${dots}
 			cp ~/.zshrc ${dots}

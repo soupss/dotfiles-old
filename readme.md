@@ -3,7 +3,7 @@
 * OS: Manjaro
 * Shell: zsh
 * WM: bspwm
-* term: alacritty
+* term: xfce4-terminal
 * font: Jetbrains Mono NL
 * panel: polybar
 
