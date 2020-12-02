@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvie/vim-flake8'
     Plug 'rrethy/vim-illuminate'
         let g:Illuminate_delay = 100
+        let g:Illuminate_highlightUnderCursor = 1
     Plug 'junegunn/goyo.vim'
         let g:goyo_width='45%'
         let g:goyo_height='80%'
@@ -41,6 +42,8 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " General settings
+set nocompatible
+set mouse=a
 set encoding=utf8
 filetype plugin indent on
 syntax on
@@ -113,17 +116,17 @@ function Highlights()
     hi StatusLine cterm=none ctermbg=none
     hi StatusLineNC cterm=none ctermbg=none
     hi illuminatedWord cterm=reverse
+    hi GruvboxRedReverse cterm=reverse ctermfg=167
+    hi GruvboxGreenReverse cterm=reverse ctermfg=142
+    hi GruvboxYellowReverse cterm=reverse ctermfg=214
+    hi GruvboxBlueReverse cterm=reverse ctermfg=109
+    hi GruvboxPurpleReverse cterm=reverse ctermfg=175
+    hi GruvboxAquaReverse cterm=reverse ctermfg=108
+    hi GruvboxOrangeReverse cterm=reverse ctermfg=208
     hi Folded ctermbg=236
+    hi MatchParen ctermbg=yellow
 endfunction
 call Highlights()
-
-hi GruvboxRedReverse cterm=reverse ctermfg=167
-hi GruvboxGreenReverse cterm=reverse ctermfg=142
-hi GruvboxYellowReverse cterm=reverse ctermfg=214
-hi GruvboxBlueReverse cterm=reverse ctermfg=109
-hi GruvboxPurpleReverse cterm=reverse ctermfg=175
-hi GruvboxAquaReverse cterm=reverse ctermfg=108
-hi GruvboxOrangeReverse cterm=reverse ctermfg=208
 
 " Statusline
 set laststatus=2
