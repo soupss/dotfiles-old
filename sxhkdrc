@@ -1,6 +1,6 @@
 # terminal emulator
 super + Return
-	xfce4-terminal
+	alacritty
 
 # web browser
 super + w
