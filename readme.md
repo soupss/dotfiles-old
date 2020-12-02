@@ -9,8 +9,24 @@
 
 #### screenshots
 
-![screencap](https://i.imgur.com/n7xwM11.png)
-![screencap](https://i.imgur.com/IFiRBRS.png)
-![screencap](https://i.imgur.com/2KJscxz.png)
-![screencap](https://i.imgur.com/Gvs7JFe.png)
-![screencap](https://i.imgur.com/cMuT8AG.png)
+desktop
+
+![screencap](https://imgur.com/VPVV0jN.png)
+![screencap](https://imgur.com/ipcecQk.png)
+
+vim+tmux
+
+![screencap](https://imgur.com/9p8lUnF.png)
+![screencap](https://imgur.com/a6RKxSK.png)
+![screencap](https://imgur.com/NkSrVhA.png)
+![screencap](https://imgur.com/rjD1Yvk.png)
+![screencap](https://imgur.com/eoCaxvk.png)
+
+panel modules
+
+![screencap](https://imgur.com/vYaysI8.png)
+![screencap](https://imgur.com/LwYF7Wg.png)
+
+application launcher (rofi)
+
+![screencap](https://imgur.com/KdVJhgP.png)
