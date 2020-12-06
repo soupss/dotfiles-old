@@ -43,7 +43,6 @@ call plug#end()
 
 " General settings
 set nocompatible
-set mouse=a
 set encoding=utf8
 filetype plugin indent on
 syntax on
@@ -100,7 +99,6 @@ elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
 endif
 
-
 " colors
 set t_Co=256
 set background=dark
@@ -116,36 +114,25 @@ function Highlights()
     hi StatusLine cterm=none ctermbg=none
     hi StatusLineNC cterm=none ctermbg=none
     hi illuminatedWord cterm=reverse
-    hi GruvboxRedReverse cterm=reverse ctermfg=167
-    hi GruvboxGreenReverse cterm=reverse ctermfg=142
-    hi GruvboxYellowReverse cterm=reverse ctermfg=214
-    hi GruvboxBlueReverse cterm=reverse ctermfg=109
-    hi GruvboxPurpleReverse cterm=reverse ctermfg=175
-    hi GruvboxAquaReverse cterm=reverse ctermfg=108
-    hi GruvboxOrangeReverse cterm=reverse ctermfg=208
+    hi ssred cterm=reverse ctermfg=167
+    hi ssgreen cterm=reverse ctermfg=142
+    hi ssdarkgray ctermbg=237 ctermfg=15
+    hi ssgray ctermbg=241 ctermfg=15
     hi Folded ctermbg=236
-    hi MatchParen ctermbg=yellow
+    hi MatchParen ctermbg=darkblue
 endfunction
 call Highlights()
 
 " Statusline
 set laststatus=2
 set statusline=
-set statusline+=%#GruvboxRedReverse#
-set statusline+=%m%r " modified and readonly flag
-set statusline+=%#GruvboxGreenReverse#
-set statusline+=\ %t\  " file name (path tail)
-set statusline+=%#GruvboxBlueReverse#
-set statusline+=\ %Y\  " file type
+"TODO: show mode
+set statusline+=\  "whitespace
+set statusline+=%#ssgreen#%m%r%#ssgray#\ %t\ %#ssdarkgray#\ %Y\ 
 set statusline+=%#GruvBoxFg0# " bar color
-set statusline+=%<\ %F " full file path
 set statusline+=%= "Right side settings
-set statusline+=%#GruvboxYellowReverse#
-" set statusline+=\ col\ %c\  " column
-set statusline+=%#GruvboxPurpleReverse#
-set statusline+=\ line\ %l\  " current line number
-set statusline+=%#GruvboxAquaReverse#
-set statusline+=\ of\ %L\  " total lines
+set statusline+=%#ssdarkgray#\ %c\ %l\ %#ssgray#\ %L\ %#GruvBoxFg0#\ 
+" set statusline+=%#Gruvbox
 
 " only show cursorline on current split
 augroup CursorLine
@@ -193,7 +180,7 @@ nnoremap <Left> <C-w><
 nnoremap <Right> <C-w>>
 nnoremap <leader>s :set hlsearch! hlsearch?<cr>
 nnoremap <leader>l :set wrap! wrap?<cr>
-nnoremap <leader>w :b#<cr>
+nnoremap <bs> :b#<cr>
 nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader><leader>g :Goyo<cr>
