@@ -38,7 +38,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
         let g:gitgutter_sign_removed = '-'
-    Plug 'yegappan/taglist'
 call plug#end()
 
 " General settings
@@ -49,7 +48,7 @@ syntax on
 set backspace=indent,eol,start
 set hidden
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
-set showmode showcmd
+set showmode
 set number relativenumber
 set cursorline
 set showmatch
@@ -111,13 +110,13 @@ function Highlights()
     hi link GitGutterChange GruvBoxYellow
     hi link GitGutterDelete GruvBoxRed
     hi link GitGutterChangeDelete GruvBoxOrange
-    hi StatusLine cterm=none ctermbg=none
-    hi StatusLineNC cterm=none ctermbg=none
+    hi StatusLine cterm=none ctermbg=none ctermfg=7
+    hi StatusLineNC cterm=none ctermbg=none ctermfg=237
     hi illuminatedWord cterm=reverse
-    hi ssred cterm=reverse ctermfg=167
-    hi ssgreen cterm=reverse ctermfg=142
-    hi ssdarkgray ctermbg=237 ctermfg=15
-    hi ssgray ctermbg=241 ctermfg=15
+    "red
+    hi User1 ctermfg=167
+    "green
+    hi User2 ctermfg=142
     hi Folded ctermbg=236
     hi MatchParen ctermbg=darkblue
 endfunction
@@ -126,13 +125,11 @@ call Highlights()
 " Statusline
 set laststatus=2
 set statusline=
-"TODO: show mode
 set statusline+=\  "whitespace
-set statusline+=%#ssgreen#%m%r%#ssgray#\ %t\ %#ssdarkgray#\ %Y\ 
-set statusline+=%#GruvBoxFg0# " bar color
+set statusline+=%1*%M%*%t
 set statusline+=%= "Right side settings
-set statusline+=%#ssdarkgray#\ %c\ %l\ %#ssgray#\ %L\ %#GruvBoxFg0#\ 
-" set statusline+=%#Gruvbox
+set statusline+=%P\ \ \ \ \ \ \ \ 
+set statusline+=%c:%l/%L
 
 " only show cursorline on current split
 augroup CursorLine
@@ -145,7 +142,7 @@ augroup END
 
 " keybinds
 let mapleader = ' '
-nnoremap <F2> :bufdo so $MYVIMRC<cr>
+nnoremap <F2> :so $MYVIMRC<cr>
 nnoremap Y y$
 " move between splits
 nnoremap <C-h> <C-w>h
