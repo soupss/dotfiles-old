@@ -9,24 +9,33 @@
 
 #### screenshots
 
-desktop
+#####desktop
 
-![screencap](https://imgur.com/VPVV0jN.png)
-![screencap](https://imgur.com/ipcecQk.png)
+![desktop](https://imgur.com/VPVV0jN.png)
+![desktop](https://imgur.com/iQZbJb0.png)
 
-vim+tmux
+#####application launcher (rofi)
 
-![screencap](https://imgur.com/9p8lUnF.png)
-![screencap](https://imgur.com/a6RKxSK.png)
-![screencap](https://imgur.com/NkSrVhA.png)
-![screencap](https://imgur.com/rjD1Yvk.png)
-![screencap](https://imgur.com/eoCaxvk.png)
+![rofi](https://imgur.com/KdVJhgP.png)
 
-panel modules
+#####vim showcase
+
+![vim](https://imgur.com/ucWwRQa.png)
+![vim](https://imgur.com/pdgHWBx.png)
+
+#####tmux showcase
+
+![tmux](https://imgur.com/5snV1Xi.png)
+![tmux](https://imgur.com/EKpv3uF.png)
+
+#####vim+tmux
+
+![screencap](https://imgur.com/79nOokr.png)
+![screencap](https://imgur.com/NUcedq6.png)
+![screencap](https://imgur.com/RVQiZRH.png)
+
+#####panel modules
 
 ![screencap](https://imgur.com/vYaysI8.png)
 ![screencap](https://imgur.com/LwYF7Wg.png)
 
-application launcher (rofi)
-
-![screencap](https://imgur.com/KdVJhgP.png)
