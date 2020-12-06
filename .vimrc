@@ -127,8 +127,8 @@ set laststatus=2
 set statusline=
 set statusline+=\  "whitespace
 set statusline+=%1*%M%*%t
-set statusline+=%= "Right side settings
-set statusline+=%P\ \ \ \ \ \ \ \ 
+set statusline+=%=%< "Right side settings
+set statusline+=%0.P\ \ \ \ \ \ \ \ 
 set statusline+=%c:%l/%L
 
 " only show cursorline on current split
