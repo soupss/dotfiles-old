@@ -1,16 +1,23 @@
 #!/bin/bash
 
 # daemons
-polybar top -r &
+polybar benq -r &
+polybar acer -r &
 sxhkd &
 
+# monitor stuff
+xrandr --output DVI-D-0 --auto --primary
+xrandr --output HDMI-0 --auto --right-of DVI-D-0
+
 # bspwm config
-bspc monitor -d 1 2 3 4 5
+bspc monitor DVI-D-0 -d 1 2 3 4 5
+bspc monitor HDMI-0 -d 6 7 8 9
 
 bspc config border_width		2
 bspc config normal_border_color		"#272727"
 bspc config focused_border_color	"#d79921"
 bspc config window_gap			15
+bspc config pointer_follows_monitor true
 bspc config focus_follows_pointer	true
 
 bspc config single_monocle true

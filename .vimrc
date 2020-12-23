@@ -4,9 +4,7 @@ call plug#begin('~/.vim/plugged')
         let g:fzf_layout = { 'down': '40%' }
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
-    Plug 'sheerun/vim-polyglot'
         let g:tex_flavor = 'latex'
-    Plug 'tpope/vim-markdown'
     Plug 'vim-scripts/indentpython.vim'
     Plug 'nvie/vim-flake8'
     Plug 'rrethy/vim-illuminate'
@@ -35,9 +33,15 @@ call plug#begin('~/.vim/plugged')
         endfunction
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
-    Plug 'morhetz/gruvbox'
     Plug 'airblade/vim-gitgutter'
         let g:gitgutter_sign_removed = '-'
+    "syntax
+    Plug 'tpope/vim-markdown'
+    Plug 'morhetz/gruvbox'
+    Plug 'posva/vim-vue'
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'pangloss/vim-javascript'
+    Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " General settings
@@ -48,7 +52,7 @@ syntax on
 set backspace=indent,eol,start
 set hidden
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
-set showmode
+set showmode showcmd
 set number relativenumber
 set cursorline
 set showmatch
@@ -110,7 +114,8 @@ function Highlights()
     hi link GitGutterChange GruvBoxYellow
     hi link GitGutterDelete GruvBoxRed
     hi link GitGutterChangeDelete GruvBoxOrange
-    hi StatusLine cterm=none ctermbg=none ctermfg=7
+    hi StatusLine cterm=none ctermbg=none ctermfg=2
+    hi StatisLineGreen cterm=none ctermbg=none ctermfg=7
     hi StatusLineNC cterm=none ctermbg=none ctermfg=237
     hi illuminatedWord cterm=reverse
     "red
@@ -124,12 +129,15 @@ call Highlights()
 
 " Statusline
 set laststatus=2
-set statusline=
-set statusline+=\  "whitespace
-set statusline+=%1*%M%*%t
-set statusline+=%=%< "Right side settings
-set statusline+=%0.P\ \ \ \ \ \ \ \ 
-set statusline+=%c:%l/%L
+function! Statusline() abort
+    let l:line=''
+    let l:line.=' %1*%M%*%t%<' " modified tag and filename
+    let l:line.='%='
+    let l:line.='%0.P        ' " percentage through file
+    let l:line.='%l:%c/%L ' " col:current line/total lines
+    return l:line
+endfunction
+set statusline=%!Statusline()
 
 " only show cursorline on current split
 augroup CursorLine
@@ -154,6 +162,8 @@ noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 " repeat last macro instead of ex mode
 nnoremap Q @@
+" repeat last command mode
+nnoremap <c-q> @:
 " delete without saving to register
 " verb: suck (to void)
 nnoremap s "_d
