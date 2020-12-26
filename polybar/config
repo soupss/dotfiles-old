@@ -47,6 +47,7 @@ font-2 = Font Awesome 5 Free:pixelsize=11;3
 
 modules-left = bspwm
 modules-center = xwindow
+modules-right = date
 
 wm-restack = bspwm
 
